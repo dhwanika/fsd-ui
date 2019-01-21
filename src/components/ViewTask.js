@@ -20,6 +20,10 @@ class ViewTask extends Component {
         this.startDateChange=this.startDateChange.bind(this);
         this.endDateChange=this.endDateChange.bind(this);
         this.searchresultsRender=this.searchresultsRender.bind(this);
+        this.editTask=this.editTask.bind(this);
+    }
+    editTask=(task)=>{
+      this.props.callbackContainer(task);
     }
     searchresultsRender=(data)=>{
       const taskFilter=this.state.task ? x => x.task.includes(this.state.task) : x => x;
@@ -67,7 +71,7 @@ class ViewTask extends Component {
       {task.end}
     </div>
     <div className="col-md-3 displayInlineFlex">
-       <button type="button" className="btn btn-primary">Edit</button>
+       <button type="button" className="btn btn-primary" onClick={() =>{this.editTask(task)}}>Edit</button>
        <span className="paddingLeft3px paddingright3px"></span>
        <button type="button" className="btn btn-primary">End Task</button>
     </div>

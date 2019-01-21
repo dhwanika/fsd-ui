@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class AddTask extends Component {
+class EditTask extends Component {
    constructor(){
         super();
         this.state={
@@ -15,16 +15,6 @@ class AddTask extends Component {
         this.parentTaskChange=this.parentTaskChange.bind(this);
         this.startDateChange=this.startDateChange.bind(this);
         this.endDateChange=this.endDateChange.bind(this);
-        this.reset=this.reset.bind(this);
-    }
-    reset=()=>{
-      this.setState({
-            task:'',
-            priority:'0',
-            parentTask:'',
-            startDate:'',
-            endDate:''
-      });
     }
     taskChange=(event) =>{
         this.setState({
@@ -52,6 +42,7 @@ this.setState({
         });
     }
 render() {
+    const {taskDetails}=this.props;
 return (
 <React.Fragment>
     <div className="row paddingTop10px">
@@ -59,7 +50,7 @@ return (
       Task:
     </div>
     <div className="col-md-9">
-      <input type="text" name="Task" value={this.state.task} onChange={this.taskChange} className="addComponentWidth"/>
+      <input type="text" name="Task" value={taskDetails.task} onChange={this.taskChange} className="addComponentWidth"/>
     </div>
     </div>
     <div className="row paddingTop10px">
@@ -69,7 +60,7 @@ return (
     <div className="col-md-9 addComponentWidth displayInlineFlex">
       <span className="paddingright3px">0</span>
       <span>
-      <input type="range"  value={this.state.priority} className="addComponentSliderWidth" id="customRange1" min="0" max="30"  onChange={this.priorityChange}/>
+      <input type="range"  value={taskDetails.priority} className="addComponentSliderWidth" id="customRange1" min="0" max="30"  onChange={this.priorityChange}/>
       </span>
       <span className="paddingLeft3px">30</span>
     </div>
@@ -79,7 +70,7 @@ return (
       Parent Task:
     </div>
     <div className="col-md-9">
-      <input type="text" name="ParentTask" value={this.state.parentTask} onChange={this.parentTaskChange} className="addComponentWidth"/>
+      <input type="text" name="ParentTask" value={taskDetails.parent} onChange={this.parentTaskChange} className="addComponentWidth"/>
     </div>
     </div>
     <div className="row paddingTop10px">
@@ -87,7 +78,7 @@ return (
       Start Date:
     </div>
     <div className="col-md-9">
-      <input type="text" name="StartDate" value={this.state.startDate} onChange={this.startDateChange} className="addComponentWidth"/>
+      <input type="text" name="StartDate" value={taskDetails.start} onChange={this.startDateChange} className="addComponentWidth"/>
     </div>
     </div>
     <div className="row paddingTop10px">
@@ -95,7 +86,7 @@ return (
       End Date:
     </div>
     <div className="col-md-9">
-      <input type="text" name="EndDate" value={this.state.endDate} onChange={this.endDateChange} className="addComponentWidth"/>
+      <input type="text" name="EndDate" value={taskDetails.end} onChange={this.endDateChange} className="addComponentWidth"/>
     </div>
     </div>
     <div className="row paddingTop10px">
@@ -103,13 +94,13 @@ return (
       
     </div>
     <div className="col-md-1">
-      <button type="button" class="btn btn-primary">Add Task</button>
+      <button type="button" class="btn btn-primary">Edit Task</button>
     </div>
     <div className="col-md-10">
-      <button type="button" class="btn btn-primary" onClick={()=>{this.reset()}}>Reset</button>
+      
     </div>
     </div>
    </React.Fragment> 
 );
    }}
-export default AddTask;
+export default EditTask;

@@ -2,15 +2,25 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import AddTask from '../components/AddTask'
 import ViewTask from '../components/ViewTask'
+import EditTask from '../components/EditTask'
 
 class Tasky extends Component {
     constructor(){
         super();
         this.state={
             addTask:false,
-            viewTask:false
+            viewTask:false,
+            editGroup:false,
+            taskDetails:{}
         }
         this.selectTask=this.selectTask.bind(this);
+    }
+    CallbackEdit = (task) => {
+        debugger;
+        this.setState({
+            editGroup: true,
+            taskDetails:task
+        });
     }
     selectTask=(event,type) =>{
         if(type==='add'){
@@ -36,7 +46,8 @@ this.setState({
         return (
             <div>
                 <h1>Task Manager</h1>
-                <div className="row">
+               {!this.state.editGroup? 
+               (<div className="row">
     <div className="col-md-6">
       <h2 onClick={event=>this.selectTask(event,'add')}>Add Task</h2>
     </div>
@@ -45,10 +56,21 @@ this.setState({
     </div>
     <div className="row paddingLeft30">
     <div className="col-md-12">
-{this.state.addTask?<AddTask/>:this.state.viewTask?<ViewTask/>:''}
+{this.state.addTask?<AddTask/>:this.state.viewTask?<ViewTask callbackContainer={this.CallbackEdit}/>:''}
         </div>
         </div>
-  </div>
+  </div>):
+(<div className="row">
+    <div className="col-md-12">
+      <h2 onClick={event=>this.selectTask(event,'add')}>Edit Task</h2>
+    </div>
+    <div className="row paddingLeft30">
+    <div className="col-md-12">
+<EditTask taskDetails={this.state.taskDetails}/>
+        </div>
+        </div>
+  </div>)
+               }
                 </div>
         );
     }
